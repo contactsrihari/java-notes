@@ -1,0 +1,13 @@
+withCredentials([
+    usernamePassword(
+        credentialsId: 'artifactory-creds',
+        usernameVariable: 'aUsername',
+        passwordVariable: 'aPassword'
+    )
+]) {
+    sh '''
+        echo "USERNAME is set? " $aUsername
+        echo "PASSWORD length: ${#aPassword}"
+        ./gradlew build --info
+    '''
+}
