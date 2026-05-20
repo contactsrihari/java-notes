@@ -1,3 +1,5 @@
+@Library('latest') _
+
 withCredentials([
     usernamePassword(
         credentialsId: 'artifactory-creds',
@@ -5,9 +7,11 @@ withCredentials([
         passwordVariable: 'aPassword'
     )
 ]) {
-    sh '''
-        echo "USERNAME is set? " $aUsername
-        echo "PASSWORD length: ${#aPassword}"
-        ./gradlew build --info
-    '''
+
+    echo "DEBUG: aUsername = ${env.aUsername}"
+    echo "DEBUG: aPassword length = ${env.aPassword?.length()}"
+
+    gradlePipelinePlugin {
+        // your existing config
+    }
 }
